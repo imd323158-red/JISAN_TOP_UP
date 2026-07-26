@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Airdrop</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+<div class="logo">
+<span>🎁 Airdrop</span>
+</div>
+
+<a href="index.html" class="login-btn">🏠 Home</a>
+
+</header>
+
+<section class="category">
+
+<h2>Choose Airdrop Package</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Small Airdrop</h3>
+<p>৳50</p>
+<button onclick="buy('Small Airdrop','50')">Buy Now</button>
+</div>
+
+<div class="card">
+<h3>Medium Airdrop</h3>
+<p>৳100</p>
+<button onclick="buy('Medium Airdrop','100')">Buy Now</button>
+</div>
+
+<div class="card">
+<h3>Large Airdrop</h3>
+<p>৳200</p>
+<button onclick="buy('Large Airdrop','200')">Buy Now</button>
+</div>
+
+<div class="card">
+<h3>Premium Airdrop</h3>
+<p>৳350</p>
+<button onclick="buy('Premium Airdrop','350')">Buy Now</button>
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+function buy(pkg,price){
+
+window.location.href =
+`payment.html?package=${encodeURIComponent(pkg)}&price=${encodeURIComponent(price)}`;
+
+}
+
+</script>
+
+</body>
+</html>
