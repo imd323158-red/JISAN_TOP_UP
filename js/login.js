@@ -1,49 +1,37 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { auth } from "../firebase-config.js";
+
 import {
-getAuth,
-signInWithEmailAndPassword
+  signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-const firebaseConfig = {
-apiKey: "তোমার apiKey",
-authDomain: "তোমার authDomain",
-projectId: "তোমার projectId",
-storageBucket: "তোমার storageBucket",
-messagingSenderId: "তোমার messagingSenderId",
-appId: "তোমার appId"
-};
+const form = document.getElementById("loginForm");
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+form.addEventListener("submit", async (e) => {
 
-document
-.getElementById("loginForm")
-.addEventListener("submit", async(e)=>{
+  e.preventDefault();
 
-e.preventDefault();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
 
-const email =
-document.getElementById("email").value;
+  try {
 
-const password =
-document.getElementById("password").value;
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
 
-try{
+    localStorage.setItem("userUid", userCredential.user.uid);
+    localStorage.setItem("userEmail", userCredential.user.email);
 
-await signInWithEmailAndPassword(
-auth,
-email,
-password
-);
+    alert("✅ Login Successful");
 
-alert("✅ Login Successful");
+    window.location.href = "index.html";
 
-window.location.href="index.html";
+  } catch (err) {
 
-}catch(err){
+    alert("❌ " + err.message);
 
-alert(err.message);
-
-}
+  }
 
 });
