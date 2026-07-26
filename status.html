@@ -157,7 +157,11 @@ Pending
 </div>
 
 <script type="module">
+const lastOrderId = localStorage.getItem("lastOrderId");
 
+if (lastOrderId) {
+    document.getElementById("orderId").value = lastOrderId;
+  }
 import { db } from "./firebase/firebase-config.js";
 
 import {
