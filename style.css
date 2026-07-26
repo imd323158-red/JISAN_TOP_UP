@@ -240,3 +240,208 @@ font-size:18px;
 }
 
 }
+/* BODY */
+
+body{
+background:#0b0b0b;
+font-family:'Poppins',sans-serif;
+color:#fff;
+margin:0;
+padding:0;
+}
+
+/* TOP BAR */
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 20px;
+background:#111;
+border-bottom:2px solid #FFD700;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-size:22px;
+font-weight:700;
+color:#FFD700;
+}
+
+.logo img{
+width:45px;
+height:45px;
+border-radius:50%;
+}
+
+.login-btn a{
+color:#fff;
+text-decoration:none;
+padding:10px 15px;
+background:#222;
+border-radius:10px;
+}
+
+/* SLIDER */
+
+.slider{
+padding:15px;
+}
+
+.slide img{
+width:100%;
+border-radius:15px;
+}
+
+/* OFFER */
+
+.offer{
+padding:20px;
+}
+
+.offer h2{
+color:#FFD700;
+margin-bottom:15px;
+}
+
+.offer-box{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+}
+
+.offer-card{
+background:#1a1a1a;
+padding:15px;
+border-radius:15px;
+text-align:center;
+border:1px solid #333;
+}
+
+.offer-card i{
+font-size:30px;
+color:#FFD700;
+margin-bottom:10px;
+}
+
+/* CATEGORY */
+
+.category{
+padding:20px;
+}
+
+.category h2{
+color:#FFD700;
+margin-bottom:20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+}
+
+.card{
+background:#1a1a1a;
+border-radius:15px;
+padding:15px;
+text-align:center;
+border:1px solid #333;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+border-color:#FFD700;
+}
+
+.card a{
+text-decoration:none;
+color:white;
+}
+
+.card img{
+width:70px;
+height:70px;
+margin-bottom:10px;
+}
+
+.card h3{
+font-size:18px;
+color:#FFD700;
+}
+
+.card p{
+font-size:14px;
+color:#ccc;
+}
+
+/* CONTACT */
+
+.contact-box{
+padding:20px;
+}
+
+.contact-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+}
+
+.contact-card{
+background:#1a1a1a;
+padding:15px;
+border-radius:15px;
+text-align:center;
+text-decoration:none;
+color:white;
+}
+
+.contact-card i{
+font-size:30px;
+color:#FFD700;
+margin-bottom:10px;
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+padding:20px;
+color:#999;
+margin-bottom:80px;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#111;
+display:flex;
+justify-content:space-around;
+padding:12px 0;
+border-top:2px solid #FFD700;
+}
+
+.bottom-nav a{
+color:#fff;
+text-decoration:none;
+display:flex;
+flex-direction:column;
+align-items:center;
+font-size:14px;
+}
+
+.bottom-nav i{
+font-size:20px;
+margin-bottom:5px;
+}
+
+.bottom-nav .active{
+color:#FFD700;
+}
