@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ZISAN TOP UP - Order Status</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0b0b0b;
+color:#fff;
+}
+
+.header{
+background:#111;
+padding:18px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+color:#FFD700;
+border-bottom:2px solid gold;
+}
+
+.container{
+width:95%;
+max-width:520px;
+margin:25px auto;
+background:#1b1b1b;
+padding:20px;
+border-radius:18px;
+border:2px solid gold;
+box-shadow:0 0 15px rgba(255,215,0,.2);
+}
+
+.title{
+text-align:center;
+font-size:28px;
+color:#FFD700;
+margin-bottom:20px;
+}
+
+label{
+display:block;
+margin-top:15px;
+margin-bottom:8px;
+font-weight:bold;
+}
+
+input{
+width:100%;
+padding:13px;
+border:none;
+border-radius:10px;
+background:#2b2b2b;
+color:#fff;
+font-size:16px;
+outline:none;
+}
+
+button{
+width:100%;
+margin-top:20px;
+padding:15px;
+border:none;
+border-radius:10px;
+background:#FFD700;
+color:#000;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.result{
+display:none;
+margin-top:25px;
+background:#262626;
+border:1px solid gold;
+border-radius:15px;
+padding:18px;
+}
+
+.result p{
+margin:12px 0;
+font-size:17px;
+}
+
+.status{
+text-align:center;
+font-size:24px;
+font-weight:bold;
+margin-top:18px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+📦 ZISAN TOP UP
+</div>
+
+<div class="container">
+
+<div class="title">
+Order Status
+</div>
+
+<label>Order ID</label>
+
+<input
+type="text"
+id="orderId"
+placeholder="Example : ZT1753528456123">
+
+<button id="checkBtn">
+🔍 Check Status
+</button>
+
+<div class="result" id="result">
+
+<p><b>🆔 UID :</b> <span id="uid"></span></p>
+
+<p><b>👤 Player :</b> <span id="player"></span></p>
+
+<p><b>💎 Package :</b> <span id="package"></span></p>
+
+<p><b>💰 Price :</b> ৳ <span id="price"></span></p>
+
+<p><b>💳 Payment :</b> <span id="payment"></span></p>
+
+<p><b>🧾 Transaction ID :</b> <span id="trx"></span></p>
+
+<div
+class="status"
+id="status">
+Pending
+</div>
+
+</div>
+<div style="margin-top:25px;text-align:center;color:#999;font-size:14px;">
+© 2026 ZISAN TOP UP
+</div>
+
+</div>
+
+<script type="module">
+
+import { db } from "./firebase/firebase-config.js";
+
+import {
+  collection,
+  query,
+  where,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+document.getElementById("checkBtn").addEventListener("click", async()=>{
+
+const orderId=document.getElementById("orderId").value.trim();
+
+if(orderId==""){
+alert("Order ID লিখুন");
+return;
+}
+
+const q=query(
+collection(db,"orders"),
+where("orderId","==",orderId)
+);
+
+const snapshot=await getDocs(q);
+
+if(snapshot.empty){
+alert("❌ Order পাওয়া যায়নি");
+return;
+}
+
+snapshot.forEach((doc)=>{
+
+const data=doc.data();
+
+document.getElementById("result").style.display="block";
+
+document.getElementById("uid").innerText=data.uid||"-";
+
+document.getElementById("player").innerText=data.playerName||"-";
+
+document.getElementById("package").innerText=data.package||"-";
+
+document.getElementById("price").innerText=data.price||"-";
+
+document.getElementById("payment").innerText=data.paymentMethod||"-";
+
+document.getElementById("trx").innerText=data.trxId||"-";
+
+const status=document.getElementById("status");
+
+status.innerText=data.status||"Pending";
+
+switch((data.status||"Pending").toLowerCase()){
+
+case "approved":
+status.style.color="#00ff66";
+break;
+
+case "completed":
+status.style.color="#00ff66";
+break;
+
+case "rejected":
+status.style.color="#ff3333";
+break;
+
+default:
+status.style.color="#FFD700";
+}
+
+});
+
+});
+
+</script>
+
+</body>
+</html>

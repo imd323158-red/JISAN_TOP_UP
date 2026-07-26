@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel - ZISAN TOP UP</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0f0f0f;
+color:#fff;
+}
+
+.header{
+background:#151515;
+padding:18px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+color:#FFD700;
+box-shadow:0 0 10px #000;
+}
+
+.dashboard{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+padding:20px;
+}
+
+.card{
+background:#1d1d1d;
+border:1px solid gold;
+border-radius:12px;
+padding:20px;
+text-align:center;
+}
+
+.card h2{
+font-size:18px;
+margin-bottom:10px;
+color:#FFD700;
+}
+
+.card p{
+font-size:30px;
+font-weight:bold;
+}
+
+.orders{
+padding:20px;
+}
+
+.order{
+background:#1d1d1d;
+border-left:5px solid gold;
+padding:15px;
+border-radius:10px;
+margin-bottom:15px;
+}
+
+.order h3{
+color:#FFD700;
+margin-bottom:8px;
+}
+
+.btns{
+margin-top:15px;
+display:flex;
+gap:10px;
+}
+
+.approve{
+flex:1;
+background:#00b894;
+color:white;
+border:none;
+padding:10px;
+border-radius:8px;
+}
+
+.cancel{
+flex:1;
+background:#d63031;
+color:white;
+border:none;
+padding:10px;
+border-radius:8px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+🛠️ ZISAN TOP UP ADMIN
+</div>
+
+<div class="dashboard">
+
+<div class="card">
+<h2>Total Orders</h2>
+<p>0</p>
+</div>
+
+<div class="card">
+<h2>Pending</h2>
+<p>0</p>
+</div>
+
+<div class="card">
+<h2>Completed</h2>
+<p>0</p>
+</div>
+
+<div class="card">
+<h2>Cancelled</h2>
+<p>0</p>
+</div>
+
+</div>
+
+<div class="orders">
+
+<div class="order">
+
+<h3>Order #0001</h3>
+
+<p>UID : 123456789</p>
+
+<p>Package : 115 Diamond</p>
+
+<p>Payment : bKash</p>
+
+<p>Status : Pending</p>
+
+<div class="btns">
+
+<button class="approve">
+Approve
+</button>
+
+<button class="cancel">
+Cancel
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

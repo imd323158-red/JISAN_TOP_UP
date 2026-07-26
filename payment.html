@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ZISAN TOP UP - Payment</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0b0b0b;
+color:#fff;
+}
+
+.header{
+background:#111;
+padding:18px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+color:#FFD700;
+border-bottom:2px solid #FFD700;
+box-shadow:0 0 15px rgba(255,215,0,.25);
+}
+
+.container{
+width:95%;
+max-width:520px;
+margin:25px auto;
+background:#181818;
+padding:22px;
+border-radius:18px;
+border:2px solid #FFD700;
+box-shadow:0 0 20px rgba(255,215,0,.15);
+}
+
+.title{
+text-align:center;
+font-size:28px;
+font-weight:bold;
+color:#FFD700;
+margin-bottom:20px;
+}
+
+.package-box{
+background:#242424;
+border:1px solid #FFD700;
+border-radius:12px;
+padding:15px;
+margin-bottom:20px;
+}
+
+.package-name{
+font-size:22px;
+font-weight:bold;
+color:#FFD700;
+}
+
+.package-price{
+margin-top:8px;
+font-size:18px;
+color:#00ff66;
+}
+
+label{
+display:block;
+margin-top:15px;
+margin-bottom:6px;
+font-weight:bold;
+}
+
+input,
+select{
+width:100%;
+padding:14px;
+background:#2d2d2d;
+border:1px solid #555;
+border-radius:10px;
+color:#fff;
+font-size:16px;
+outline:none;
+}
+
+input:focus,
+select:focus{
+border-color:#FFD700;
+}
+
+.payment-box{
+display:none;
+margin-top:15px;
+padding:15px;
+background:#242424;
+border:1px solid #FFD700;
+border-radius:12px;
+text-align:center;
+}
+
+.payment-title{
+font-size:18px;
+font-weight:bold;
+color:#FFD700;
+}
+
+.payment-number{
+margin-top:10px;
+font-size:24px;
+font-weight:bold;
+color:#00ff66;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:25px;
+background:#FFD700;
+color:#000;
+border:none;
+border-radius:10px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+background:#ffca00;
+}
+
+.footer{
+margin-top:25px;
+text-align:center;
+font-size:14px;
+color:#aaa;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+💳 ZISAN TOP UP
+</div>
+
+<div class="container">
+
+<div class="title">
+Complete Payment
+</div>
+
+<div class="package-box">
+
+<div class="package-name" id="packageName">
+Loading...
+</div>
+
+<div class="package-price" id="packagePrice">
+৳0
+</div>
+
+</div>
+<form id="orderForm">
+
+<label>Free Fire UID</label>
+<input
+type="text"
+id="uid"
+placeholder="Enter Free Fire UID"
+required>
+
+<label>Player Name</label>
+<input
+type="text"
+id="playerName"
+placeholder="Enter Player Name"
+required>
+
+<label>Payment Method</label>
+
+<select id="paymentMethod" required>
+
+<option value="">Select Payment Method</option>
+
+<option value="Bkash">🟣 bKash</option>
+
+<option value="Nagad">🟠 Nagad</option>
+
+</select>
+
+<div class="payment-box" id="paymentBox">
+
+<div class="payment-title" id="paymentTitle">
+Select Payment Method
+</div>
+
+<div class="payment-number" id="paymentNumber"></div>
+
+</div>
+
+<label>Transaction ID</label>
+
+<input
+type="text"
+id="trxId"
+placeholder="Enter Transaction ID"
+required>
+
+<label>Payment Screenshot (Optional)</label>
+
+<input
+type="file"
+id="screenshot"
+accept="image/*">
+
+<button type="submit">
+🚀 Submit Order
+</button>
+
+</form>
+
+<div class="footer">
+© 2026 ZISAN TOP UP
+</div>
+<script type="module">
+
+import { db } from "./firebase/firebase-config.js";
+
+import {
+  collection,
+  addDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// Package & Price
+const params = new URLSearchParams(window.location.search);
+
+const packageName = params.get("package") || "Not Selected";
+const packagePrice = params.get("price") || "0";
+
+document.getElementById("packageName").innerText = packageName;
+document.getElementById("packagePrice").innerText = "৳ " + packagePrice;
+
+// Payment Method
+const paymentMethod = document.getElementById("paymentMethod");
+
+paymentMethod.addEventListener("change", function () {
+
+  const box = document.getElementById("paymentBox");
+  const title = document.getElementById("paymentTitle");
+  const number = document.getElementById("paymentNumber");
+
+  if (this.value === "Bkash") {
+
+    box.style.display = "block";
+    title.innerText = "🟣 Send Money To bKash";
+    number.innerText = "01827590725";
+
+  } else if (this.value === "Nagad") {
+
+    box.style.display = "block";
+    title.innerText = "🟠 Send Money To Nagad";
+    number.innerText = "01797716079";
+
+  } else {
+
+    box.style.display = "none";
+
+  }
+
+});
+
+// Submit Order
+document.getElementById("orderForm").addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+  const uid = document.getElementById("uid").value.trim();
+  const player = document.getElementById("playerName").value.trim();
+  const trx = document.getElementById("trxId").value.trim();
+
+  if (!uid || !player || !trx) {
+    alert("সব তথ্য পূরণ করুন");
+    return;
+  }
+
+  if (!paymentMethod.value) {
+    alert("Payment Method নির্বাচন করুন");
+    return;
+  }
+
+  const orderId = "ZT" + Date.now();
+
+  try {
+
+    await addDoc(collection(db, "orders"), {
+
+      orderId: orderId,
+      uid: uid,
+      playerName: player,
+      package: packageName,
+      price: packagePrice,
+      paymentMethod: paymentMethod.value,
+      trxId: trx,
+      status: "Pending",
+      createdAt: new Date().toISOString()
+
+    });
+await fetch("https://telegram-order-api-d4jz.onrender.com/send-order", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    uid: uid,
+    playerName: player,
+    packageName: packageName,
+    price: packagePrice,
+    paymentMethod: paymentMethod.value,
+    trxId: trx,
+    orderId: orderId
+  })
+});
+    alert(
+      "✅ Order Submitted Successfully!\n\nOrder ID: " +
+      orderId +
+      "\n\nএই Order ID সংরক্ষণ করুন।"
+    );
+
+    window.location.href = "status.html";
+
+  } catch (err) {
+
+    alert("Error : " + err.message);
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>
