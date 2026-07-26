@@ -1,22 +1,21 @@
-import { db } from "../firebase-config.js";
-document.addEventListener("DOMContentLoaded", () => {
+const slides = [
+"images/banner1.jpg",
+"images/banner2.jpg",
+"images/banner3.jpg"
+];
 
-  const buttons = document.querySelectorAll(".buy-btn");
+let current = 0;
 
-  buttons.forEach((button) => {
+const sliderImage = document.querySelector(".slide img");
 
-    button.addEventListener("click", () => {
+setInterval(() => {
 
-      const card = button.parentElement;
+current++;
 
-      const packageName = card.querySelector("h3").innerText;
-      const price = card.querySelector("p").innerText.replace("৳", "").trim();
+if(current >= slides.length){
+current = 0;
+}
 
-      window.location.href =
-        `payment.html?package=${encodeURIComponent(packageName)}&price=${encodeURIComponent(price)}`;
+sliderImage.src = slides[current];
 
-    });
-
-  });
-
-});
+},3000);
