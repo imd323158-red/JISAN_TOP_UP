@@ -335,7 +335,7 @@ await fetch("https://telegram-order-api-d4jz.onrender.com/send-order", {
       orderId +
       "\n\nএই Order ID সংরক্ষণ করুন।"
     );
-
+localStorage.setItem("lastOrderId", orderId);
     window.location.href = "status.html";
 
   } catch (err) {
