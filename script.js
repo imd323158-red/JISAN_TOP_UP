@@ -1,4 +1,4 @@
-import { db } from "../firebase/firebase-config.js";
+import { db } from "../firebase-config.js";
 document.addEventListener("DOMContentLoaded", () => {
 
   const buttons = document.querySelectorAll(".buy-btn");
