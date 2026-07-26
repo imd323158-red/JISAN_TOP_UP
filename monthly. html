@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monthly Membership</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+<div class="logo">
+<span>📆 Monthly Membership</span>
+</div>
+
+<a href="index.html" class="login-btn">🏠 Home</a>
+
+</header>
+
+<section class="category">
+
+<h2>Choose Monthly Package</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Monthly Membership</h3>
+<p>৳745</p>
+<button onclick="buy('Monthly Membership','745')">Buy Now</button>
+</div>
+
+<div class="card">
+<h3>Monthly Lite</h3>
+<p>৳700</p>
+<button onclick="buy('Monthly Lite','700')">Buy Now</button>
+</div>
+
+<div class="card">
+<h3>Monthly Premium</h3>
+<p>৳850</p>
+<button onclick="buy('Monthly Premium','850')">Buy Now</button>
+</div>
+
+<div class="card">
+<h3>Monthly + Bonus</h3>
+<p>৳900</p>
+<button onclick="buy('Monthly + Bonus','900')">Buy Now</button>
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+function buy(pkg,price){
+
+window.location.href =
+`payment.html?package=${encodeURIComponent(pkg)}&price=${encodeURIComponent(price)}`;
+
+}
+
+</script>
+
+</body>
+</html>
