@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Membership</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+<div class="logo">
+<span>👑 Membership</span>
+</div>
+
+<a href="index.html" class="login-btn">🏠 Home</a>
+
+</header>
+
+<section class="category">
+
+<h2>Choose Membership</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Silver Membership</h3>
+<p>৳299</p>
+<button onclick="buy('Silver Membership','299')">Buy Now</button>
+</div>
+
+<div class="card">
+<h3>Gold Membership</h3>
+<p>৳599</p>
+<button onclick="buy('Gold Membership','599')">Buy Now</button>
+</div>
+
+<div class="card">
+<h3>Platinum Membership</h3>
+<p>৳999</p>
+<button onclick="buy('Platinum Membership','999')">Buy Now</button>
+</div>
+
+<div class="card">
+<h3>VIP Membership</h3>
+<p>৳1499</p>
+<button onclick="buy('VIP Membership','1499')">Buy Now</button>
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+function buy(pkg,price){
+
+window.location.href =
+`payment.html?package=${encodeURIComponent(pkg)}&price=${encodeURIComponent(price)}`;
+
+}
+
+</script>
+
+</body>
+</html>
