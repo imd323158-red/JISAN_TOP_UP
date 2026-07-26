@@ -170,7 +170,12 @@ import {
   where,
   getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const lastOrderId = localStorage.getItem("lastOrderId");
 
+if (lastOrderId) {
+    document.getElementById("orderId").value = lastOrderId;
+    document.getElementById("checkBtn").click();
+    }
 document.getElementById("checkBtn").addEventListener("click", async()=>{
 
 const orderId=document.getElementById("orderId").value.trim();
